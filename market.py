@@ -23,6 +23,10 @@ def shop_page():
             'image': 'https://pm-proshop.herokuapp.com/images/mouse.jpg'},
         {'id': 6, 'name': 'Apple iPhone 11 Pro Max', 'price': 999.99,
             'image': 'https://pm-proshop.herokuapp.com/images/phone.jpg'},
+        {'id': 7, 'name': 'Samsung Galaxy S20 Ultra', 'price': 1099.99,
+            'image': 'https://picsum.photos/640/510?image=1'},
+        {'id': 8, 'name': 'Apple Macbook Pro 13.9-inch', 'price': 799.99,
+            'image': 'https://picsum.photos/640/510?image=2'},
     ]
     return render_template('shop.html', products=products)
 
