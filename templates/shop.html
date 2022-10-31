@@ -31,16 +31,31 @@
     <main class="py-5 bg-dark text-light" style="min-height: 85vh; --bs-bg-opacity: .9">
         <div class="container">
 
-            <h1>This is shop page!</h1>
+            <h1 class="mb-4">LATEST PRODUCTS</h1>
 
+            <div class="row">
+                {% for product in products %}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div class="card bg-dark d-block mb-4">
+                        <img src="{{ product.image }}" class="card-img-top" alt="{{product.name}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{product.name}}</h5>
+                            <p class="card-text text-success">${{ product.price }}</p>
+                            <a href="{{ product.name }}" class="btn btn-success">Browse Product >></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
         </div>
     </main>
 
     <footer class="footer-wrap bg-dark text-light">
         <div class="container">
             <div class="row">
-                <p class="text-center py-3 col">Copyright © 2022. All right reserverd FLaskMarket. Developed by <a
-                        href="http://promehedi.com">Mehedi Hasan</a></p>
+                <p class="text-center py-3 col">Copyright © 2022. All right reserverd FLaskMarket.
+                    Developed by <a class="text-success" href="http://promehedi.com">Mehedi Hasan</a></p>
             </div>
         </div>
     </footer>
