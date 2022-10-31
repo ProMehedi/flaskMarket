@@ -2,8 +2,8 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-@app.route('/')
 @app.route('/home')
+@app.route('/')
 def home_page():
     return render_template('home.html')
 
@@ -31,6 +31,11 @@ def shop_page():
     return render_template('shop.html', products=products)
 
 
-@app.route('/user/<name>')
-def user_page(name):
-    return f'<h1>Hey {name}, Welcome Back!</h1>'
+@app.route('/login')
+def login_page():
+    return f'<h1>Login Page</h1>'
+
+
+@app.route('/register')
+def register_page():
+    return f'<h1>Register Page</h1>'
