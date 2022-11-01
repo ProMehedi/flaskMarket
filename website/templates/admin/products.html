@@ -36,7 +36,7 @@
                         class="fas fa-up-right-from-square"></i></a>
                 <a href="/admin/products/{{ product.id }}/edit" class="btn btn-sm btn-outline-warning"><i
                         class="fas fa-pen"></i></a>
-                <a class="btn btn-sm btn-outline-danger">
+                <a class="btn btn-sm btn-outline-danger" onclick="delProduct('{{ product.id }}')">
                     <i class="fas fa-trash"></i>
                 </a>
             </td>
@@ -44,6 +44,21 @@
         {% endfor %}
     </tbody>
 </table>
+
+<script>
+    function delProduct(id) {
+        if (confirm('Are you sure you want to delete this product?')) {
+            fetch(`/admin/products/${Number(id)}`, {
+                method: 'DELETE'
+            }).then(res => {
+                console.log(res)
+                if (res.status === 200) {
+                    window.location.reload()
+                }
+            })
+        }
+    }
+</script>
 
 
 {% endblock %}

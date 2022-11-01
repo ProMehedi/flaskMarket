@@ -31,6 +31,16 @@ def admin_products():
     return render_template("admin/products.html", products=products)
 
 
+@views.route('/admin/products/<int:id>/', methods=['GET', 'POST', 'DELETE'])
+@login_required
+def single_products(id):
+    if request.method == 'DELETE':
+        product = Product.query.get(id)
+        db.session.delete(product)
+        db.session.commit()
+    return "Single Product"
+
+
 @views.route('admin/products/new/', methods=['GET', 'POST'])
 @login_required
 def new_product():
