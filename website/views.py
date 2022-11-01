@@ -10,12 +10,24 @@ def home():
     return render_template("home.html")
 
 
-@views.route('/products')
+@views.route('/products/')
 def products():
     return render_template("products.html")
 
 
-@views.route('/user')
+@views.route('/admin/')
 @login_required
-def user():
-    return render_template("user.html")
+def admin():
+    return render_template("admin/index.html")
+
+
+@views.route('/admin/products/')
+@login_required
+def admin_products():
+    return render_template("admin/products.html")
+
+
+@views.route('admin/products/new/')
+@login_required
+def new_product():
+    return render_template("admin/new-product.html")

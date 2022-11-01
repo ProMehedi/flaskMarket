@@ -1,0 +1,76 @@
+{% extends 'admin/base.html' %}
+{% block title %}{{ current_user.name }}{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Add New Product</h1>
+    <a href="#" class="btn btn-outline-light">
+        Save Product
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card bg-dark">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Product Information</h5>
+            </div>
+            <div class="card-body bg-light" style="--bs-bg-opacity: .025">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Project Name</label>
+                    <input type="text" name="name" id="name" class="form-control form-control-dark bg-dark text-light"
+                        placeholder="Enter Product name">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Project Description</label>
+                    <textarea name="description" id="description"
+                        class="form-control form-control-dark bg-dark text-light" rows="5"
+                        placeholder="Enter Product Description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image Url</label>
+                    <input type="text" name="image" id="image" class="form-control form-control-dark bg-dark text-light"
+                        placeholder="Enter Image Url">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card bg-dark">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Product Meta</h5>
+            </div>
+            <div class="card-body bg-light" style="--bs-bg-opacity: .025">
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" name="price" id="price"
+                        class="form-control form-control-dark bg-dark text-light" placeholder="Enter Price">
+                </div>
+                <div class="mb-3">
+                    <label for="cateogry" class="form-label">Category</label>
+                    <select id="cateogry" class="form-select form-control-dark bg-dark text-light">
+                        <option disabled selected>-- Select Category --</option>
+                        <option>On Hold</option>
+                        <option>Canceled</option>
+                        <option>Success</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="stock" class="form-label">Stock Quantity</label>
+                    <input type="number" name="stock" id="stock"
+                        class="form-control form-control-dark bg-dark text-light" placeholder="Enter Stock Quantity">
+                </div>
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="number" name="rating" id="rating"
+                        class="form-control form-control-dark bg-dark text-light" placeholder="Enter Rating">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
