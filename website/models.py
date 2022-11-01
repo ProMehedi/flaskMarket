@@ -7,6 +7,7 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(150))
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(55))
+    role: db.Column(db.String(25), default='user')
     products = db.relationship('Product')
 
 
