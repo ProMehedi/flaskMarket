@@ -1,0 +1,86 @@
+{% extends 'admin/base.html' %}
+{% block title %}{{ current_user.name }}{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Add New Product</h1>
+        <button type="submit" class="btn btn-outline-light">
+            Update Product
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card bg-dark">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Product Information</h5>
+                </div>
+                <div class="card-body bg-light" style="--bs-bg-opacity: .025">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Project Name</label>
+                        <input type="text" name="name" id="name"
+                            class="form-control form-control-dark bg-dark text-light" placeholder="Enter Product name"
+                            value="{{ product.name }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Project Description</label>
+                        <textarea name="description" id="description"
+                            class="form-control form-control-dark bg-dark text-light" rows="5"
+                            placeholder="Enter Product Description">{{ product.description }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image Url</label>
+                        <input type="text" name="image" id="image"
+                            class="form-control form-control-dark bg-dark text-light" placeholder="Enter Image Url"
+                            value="{{ product.image }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card bg-dark">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Product Meta</h5>
+                </div>
+                <div class="card-body bg-light" style="--bs-bg-opacity: .025">
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" name="price" id="price" step="any"
+                            class="form-control form-control-dark bg-dark text-light" placeholder="Enter Price"
+                            value="{{ product.price }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cateogry" class="form-label">Category</label>
+                        <select name="category" id="cateogry" class="form-select form-control-dark bg-dark text-light">
+                            <option disabled selected>-- Select Category --</option>
+
+                            <option value="electronics" {% if 'electronics'==product.category %}selected{% endif %}>
+                            </option>
+                            Electronics</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label">Stock Quantity</label>
+                        <input type="number" name="stock" id="stock"
+                            class="form-control form-control-dark bg-dark text-light" placeholder="Enter Stock Quantity"
+                            value="{{ product.stock }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Rating</label>
+                        <input type="number" name="rating" id="rating" step="any"
+                            class="form-control form-control-dark bg-dark text-light" placeholder="Enter Rating"
+                            value="{{ product.rating }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+{% endblock %}

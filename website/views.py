@@ -9,13 +9,21 @@ views = Blueprint('views', __name__)
 @views.route('/home')
 @views.route('/')
 def home():
-    return render_template("home.html")
+    products = Product.query.all()
+    return render_template("products.html", products=products)
 
 
 @views.route('/products/')
 def products():
     products = Product.query.all()
     return render_template("products.html", products=products)
+
+
+@views.route('/products/<int:id>/')
+@login_required
+def product(id):
+    product = Product.query.get(id)
+    return render_template("/product.html", product=product)
 
 
 @views.route('/admin/')
@@ -31,16 +39,38 @@ def admin_products():
     return render_template("admin/products.html", products=products)
 
 
-@views.route('/products/<int:id>/', methods=['GET', 'POST', 'DELETE'])
+@views.route('/admin/products/<int:id>/delete', methods=['GET', 'POST'])
 @login_required
-def single_products(id):
-    if request.method == 'DELETE':
+def product_del(id):
+    if request.method == 'POST':
         product = Product.query.get(id)
         db.session.delete(product)
         db.session.commit()
 
     product = Product.query.get(id)
-    return render_template("/product.html", product=product)
+    return render_template("/admin/edit-product.html", product=product)
+
+
+@views.route('/admin/products/<int:id>/', methods=['GET', 'POST'])
+@views.route('/admin/products/<int:id>/edit', methods=['GET', 'POST'])
+@login_required
+def product_edit(id):
+    if request.method == 'POST':
+        product = Product.query.get(id)
+        product.name = request.form.get('name')
+        product.description = request.form.get('description')
+        product.image = request.form.get('image')
+        product.category = request.form.get('category')
+        product.price = request.form.get('price')
+        product.stock = request.form.get('stock')
+        product.rating = request.form.get('rating')
+        db.session.commit()
+
+        flash('Product updated successfully!', category='success')
+        return redirect(url_for('views.product_edit', id=product.id))
+
+    product = Product.query.get(id)
+    return render_template("/admin/edit-product.html", product=product)
 
 
 @views.route('admin/products/new/', methods=['GET', 'POST'])
