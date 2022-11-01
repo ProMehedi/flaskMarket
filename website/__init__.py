@@ -1,3 +1,4 @@
+from os import path
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -17,4 +18,14 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
+    from . import models
+    create_database(app)
+
     return app
+
+
+def create_database(app):
+    if not path.exists('website/' + DB_NAME):
+        with app.app_context():
+            db.create_all()
+            print('Created Database!')
