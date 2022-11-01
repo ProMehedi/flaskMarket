@@ -90,5 +90,7 @@ def new_product():
         db.session.add(new_product)
         db.session.commit()
         flash('Product added successfully!', category='success')
+        product = Product.query.get(new_product.id)
+        return redirect(url_for('views.product_edit', id=product.id))
 
     return render_template("admin/new-product.html")
