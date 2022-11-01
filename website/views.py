@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, render_template, request
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from .models import Product
 from . import db
@@ -27,7 +27,8 @@ def admin():
 @views.route('/admin/products/')
 @login_required
 def admin_products():
-    return render_template("admin/products.html")
+    products = Product.query.all()
+    return render_template("admin/products.html", products=products)
 
 
 @views.route('admin/products/new/', methods=['GET', 'POST'])
