@@ -42,6 +42,11 @@ def admin_products():
 @views.route('/admin/products/<int:id>/delete', methods=['GET', 'POST'])
 @login_required
 def product_del(id):
+    product = Product.query.get(id)
+    if not product:
+        flash('Product not found.', category='error')
+        return redirect(url_for('views.admin_products'))
+
     if request.method == 'POST':
         product = Product.query.get(id)
         db.session.delete(product)
@@ -55,6 +60,11 @@ def product_del(id):
 @views.route('/admin/products/<int:id>/edit', methods=['GET', 'POST'])
 @login_required
 def product_edit(id):
+    product = Product.query.get(id)
+    if not product:
+        flash('Product not found.', category='error')
+        return redirect(url_for('views.admin_products'))
+
     if request.method == 'POST':
         product = Product.query.get(id)
         product.name = request.form.get('name')
@@ -69,7 +79,6 @@ def product_edit(id):
         flash('Product updated successfully!', category='success')
         return redirect(url_for('views.product_edit', id=product.id))
 
-    product = Product.query.get(id)
     return render_template("/admin/edit-product.html", product=product)
 
 
