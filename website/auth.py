@@ -38,7 +38,11 @@ def register():
         password1 = request.form.get('password')
         password2 = request.form.get('cpassword')
 
-        if len(name) < 2:
+        existing_user = User.query.filter_by(email=email).first()
+
+        if existing_user:
+            flash('Account already exist with that email.', category='danger')
+        elif len(name) < 2:
             flash('Name must be greater than 1 character.', category='danger')
         elif len(email) < 4:
             flash('Email must be greater than 3 characters.', category='danger')
